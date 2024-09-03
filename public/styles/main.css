@@ -32,3 +32,29 @@ img {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* styles.css */
+
+/* ...previous styles remain unchanged... */
+
+.instructions, .ingredients {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}

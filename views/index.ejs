@@ -4,22 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cocktail Finder</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
-    
+        
     <div class="container">
+        <!-- Cocktail Title -->
         <div class="title">
             <%= data.strDrink %>
         </div>
+
+        <!-- Cocktail Image -->
         <% if(data.strDrinkThumb != null) { %>
-                <img src=  "<%= data.strDrinkThumb %>"  alt="<%= data.strDrink %>">
-            <% } %>
-        
+            <img src="<%= data.strDrinkThumb %>" alt="<%= data.strDrink %>">
+        <% } %>
 
+        <!-- Instructions -->
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p><%= data.strInstructions %></p>
+        </div>
+
+        <!-- Ingredients and Measures -->
+        <div class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+                <% for(let i = 1; i <= 15; i++) { 
+                    let ingredient = data[`strIngredient${i}`];
+                    let measure = data[`strMeasure${i}`];
+                    if(ingredient) { %>
+                        <li><%= ingredient %> - <%= measure || "" %></li>
+                <% } } %>
+            </ul>
+        </div>
     </div>
-
-
-
-
-</body>
+    
+    </body>
 </html>
