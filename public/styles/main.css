@@ -1,60 +1,150 @@
-/* styles.css */
-
+/* General Styling */
 body, html {
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
+    background: url('/images/bg-bar.jfif') no-repeat center center fixed; /* Background image */
+    background-size: cover; /* Ensure the image covers the entire background */
 }
 
 .container {
+    max-width: 800px;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.85); /* Slight transparency for text readability */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin: 40px 20px;
     text-align: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-    font-size: 2.5rem; /* Large title font size */
-    font-weight: bold;
+/* Title Styling */
+header h1 {
+    font-size: 2.5rem;
     color: #333;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #5bc0de;
+    padding-bottom: 10px;
+}
+
+/* Search Section */
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.search-section form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-section input[type="text"] {
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 260px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.search-section input[type="text"]:focus {
+    border-color: #5bc0de;
+    box-shadow: 0 0 8px rgba(91, 192, 222, 0.5);
+}
+
+.search-section button {
+    padding: 12px 25px;
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-section button:hover {
+    background-color: #339ab8;
+}
+
+/* Cocktail Info Section */
+.cocktail-info h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.cocktail-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-img {
-    max-width: 300px; /* Fixed image size */
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* styles.css */
-
-/* ...previous styles remain unchanged... */
-
+/* Instructions and Ingredients */
 .instructions, .ingredients {
     text-align: left;
-    margin-top: 20px;
     font-size: 1.2rem;
     color: #333;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-h2 {
-    font-size: 1.8rem;
+.instructions h3, .ingredients h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
     color: #555;
-    margin-bottom: 10px;
 }
 
-ul {
+.ingredients ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.ingredients li {
+    font-size: 1.1rem;
     margin: 5px 0;
+}
+
+/* Error Handling */
+.error {
+    text-align: center;
+    color: red;
+    font-size: 1.3em;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .search-section form {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cocktail-info img {
+        max-width: 100%;
+    }
 }

@@ -4,54 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cocktail Finder</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css"> <!-- Assuming your CSS is in 'styles/main.css' -->
 </head>
 <body>
-    <form id="myForm" action="/search-cocktail" method="POST"> <!-- Fixed action to match your route -->
-        <label for="idInput">Find a Cocktail:</label>
-        <input type="text" id="idInput" name="search" placeholder="Enter cocktail name">
-
-        <label for="submit"></label>
-        <input id="search" type="submit" value="Search">
-    </form>
-
     <div class="container">
-        <% if (data) { %> <!-- Show data if available -->
-            <!-- Cocktail Title -->
-            <div class="title">
-                <h1><%= data.strDrink %></h1>
-            </div>
+        <header>
+            <h1>Cocktail Finder!</h1> <!-- Added Title -->
+        </header>
+        
+        <!-- Search Form Section -->
+        <section class="search-section">
+            <form id="myForm" action="/search-cocktail" method="POST">
+                <label for="idInput">Find a Cocktail:</label>
+                <input type="text" id="idInput" name="search" placeholder="Enter cocktail name">
 
-            <!-- Cocktail Image -->
-            <% if (data.strDrinkThumb) { %>
+                <button type="submit">Search</button>
+
+                <button type="button" onclick="window.location.href='/'">Random Cocktail</button>
+            </form>
+        </section>
+
+        <!-- Cocktail Info Section -->
+        <section class="cocktail-info">
+            <% if (data) { %> <!-- Show data if available -->
+                <h2><%= data.strDrink %></h2>
                 <img src="<%= data.strDrinkThumb %>" alt="<%= data.strDrink %>">
+                <div class="instructions">
+                    <h3>Instructions</h3>
+                    <p><%= data.strInstructions %></p>
+                </div>
+                <div class="ingredients">
+                    <h3>Ingredients</h3>
+                    <ul>
+                        <% for (let i = 1; i <= 15; i++) {
+                            let ingredient = data[`strIngredient${i}`];
+                            let measure = data[`strMeasure${i}`];
+                            if (ingredient) { %>
+                                <li><%= ingredient %> - <%= measure || "" %></li>
+                        <% } } %>
+                    </ul>
+                </div>
+            <% } else if (error) { %> <!-- Show error message if error exists -->
+                <div class="error">
+                    <p><%= error %></p>
+                </div>
             <% } %>
-
-            <!-- Instructions -->
-            <div class="instructions">
-                <h2>Instructions</h2>
-                <p><%= data.strInstructions %></p>
-            </div>
-
-            <!-- Ingredients and Measures -->
-            <div class="ingredients">
-                <h2>Ingredients</h2>
-                <ul>
-                    <% for (let i = 1; i <= 15; i++) {
-                        let ingredient = data[`strIngredient${i}`];
-                        let measure = data[`strMeasure${i}`];
-                        if (ingredient) { %>
-                            <li><%= ingredient %> - <%= measure || "" %></li>
-                    <% } } %>
-                </ul>
-            </div>
-        <% } else if (error) { %> <!-- Show error message if error exists -->
-            <div class="error">
-                <p><%= error %></p>
-            </div>
-        <% } else { %> <!-- Initial message for random cocktail -->
-            <p>Search for a cocktail or enjoy a random one!</p>
-        <% } %>
+        </section>
     </div>
 </body>
 </html>
