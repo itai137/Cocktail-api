@@ -7,37 +7,51 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
-        
+    <form id="myForm" action="/search-cocktail" method="POST"> <!-- Fixed action to match your route -->
+        <label for="idInput">Find a Cocktail:</label>
+        <input type="text" id="idInput" name="search" placeholder="Enter cocktail name">
+
+        <label for="submit"></label>
+        <input id="search" type="submit" value="Search">
+    </form>
+
     <div class="container">
-        <!-- Cocktail Title -->
-        <div class="title">
-            <%= data.strDrink %>
-        </div>
+        <% if (data) { %> <!-- Show data if available -->
+            <!-- Cocktail Title -->
+            <div class="title">
+                <h1><%= data.strDrink %></h1>
+            </div>
 
-        <!-- Cocktail Image -->
-        <% if(data.strDrinkThumb != null) { %>
-            <img src="<%= data.strDrinkThumb %>" alt="<%= data.strDrink %>">
+            <!-- Cocktail Image -->
+            <% if (data.strDrinkThumb) { %>
+                <img src="<%= data.strDrinkThumb %>" alt="<%= data.strDrink %>">
+            <% } %>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h2>Instructions</h2>
+                <p><%= data.strInstructions %></p>
+            </div>
+
+            <!-- Ingredients and Measures -->
+            <div class="ingredients">
+                <h2>Ingredients</h2>
+                <ul>
+                    <% for (let i = 1; i <= 15; i++) {
+                        let ingredient = data[`strIngredient${i}`];
+                        let measure = data[`strMeasure${i}`];
+                        if (ingredient) { %>
+                            <li><%= ingredient %> - <%= measure || "" %></li>
+                    <% } } %>
+                </ul>
+            </div>
+        <% } else if (error) { %> <!-- Show error message if error exists -->
+            <div class="error">
+                <p><%= error %></p>
+            </div>
+        <% } else { %> <!-- Initial message for random cocktail -->
+            <p>Search for a cocktail or enjoy a random one!</p>
         <% } %>
-
-        <!-- Instructions -->
-        <div class="instructions">
-            <h2>Instructions</h2>
-            <p><%= data.strInstructions %></p>
-        </div>
-
-        <!-- Ingredients and Measures -->
-        <div class="ingredients">
-            <h2>Ingredients</h2>
-            <ul>
-                <% for(let i = 1; i <= 15; i++) { 
-                    let ingredient = data[`strIngredient${i}`];
-                    let measure = data[`strMeasure${i}`];
-                    if(ingredient) { %>
-                        <li><%= ingredient %> - <%= measure || "" %></li>
-                <% } } %>
-            </ul>
-        </div>
     </div>
-    
-    </body>
+</body>
 </html>
